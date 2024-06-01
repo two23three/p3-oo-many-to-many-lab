@@ -88,3 +88,42 @@ class Contract:
     def contracts_by_date(cls, date):
         return [contract for contract in cls.all if contract.date == date]
         
+# Creating instances of Author
+author1 = Author("J.K. Rowling")
+author2 = Author("George R.R. Martin")
+
+# Creating instances of Book
+book1 = Book("Harry Potter and the Philosopher's Stone")
+book2 = Book("A Game of Thrones")
+book3 = Book("Harry Potter and the Chamber of Secrets")
+
+# Creating instances of Contract
+contract1 = Contract(author1, book1, "1997-06-26", 50000)
+contract2 = Contract(author2, book2, "1996-08-06", 60000)
+contract3 = Contract(author1, book3, "1998-07-02", 55000)
+contract4 = Contract(author2, book1, "2020-01-01", 7000) 
+
+# Verify the instances and relationships
+print("Authors:")
+for author in Author.all:
+    print(f"- {author.name}")
+
+print("\nBooks:")
+for book in Book.all:
+    print(f"- {book.title}")
+
+print("\nContracts:")
+for contract in Contract.all:
+    print(f"- Author: {contract.author.name}, Book: {contract.book.title}, Date: {contract.date}, Royalties: {contract.royalties}")
+
+# Test Author methods
+print("\nContracts for J.K. Rowling:")
+for contract in author1.contracts():
+    print(f"- {contract.book.title} on {contract.date} for {contract.royalties}")
+
+print("\nBooks written by George R.R. Martin:")
+for book in author2.books():
+    print(f"- {book.title}")
+
+print("\nTotal royalties for J.K. Rowling:")
+print(author1.total_royalties())
